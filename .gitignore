@@ -208,3 +208,6 @@ __marimo__/
 
 # Node modules
 node_modules/
+
+*storybook.log
+storybook-static

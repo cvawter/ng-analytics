@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { ontologyTerms, relationshipGraph } from "@ng-analytics/shared";
 import { motion } from "framer-motion";
 import {
     Search,
@@ -26,63 +27,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const ontologyTerms = [
-    {
-        id: "ng-working-gas",
-        name: "Working Gas",
-        domain: "Natural Gas",
-        status: "Curated",
-        confidence: 0.96,
-        definition: "Natural gas in underground storage that is available to the marketplace.",
-        mappedTo: ["QUDT:Volume", "MacroDesk:StorageMetric"],
-        sources: ["EIA WNGSR", "Natural Gas Monthly"],
-        relationships: ["MEASURED_IN Bcf", "PART_OF GasStorageReport", "AFFECTS StorageShockSignal"],
-    },
-    {
-        id: "fibo-instrument",
-        name: "Financial Instrument",
-        domain: "FIBO / Trading",
-        status: "Mapped",
-        confidence: 0.92,
-        definition: "A tradable contract or claim used for investment, hedging, or speculation.",
-        mappedTo: ["FIBO:FinancialInstrument", "MacroDesk:TradableInstrument"],
-        sources: ["FIBO", "CME Natural Gas Futures Specs"],
-        relationships: ["HAS_UNDERLYING Commodity", "HAS_EXPIRY ContractMonth", "USED_IN TradeDecision"],
-    },
-    {
-        id: "ai-mw-load",
-        name: "AI Data Center MW Load",
-        domain: "AI Energy Demand",
-        status: "Reviewed",
-        confidence: 0.88,
-        definition: "Estimated electrical load required by AI compute clusters and supporting infrastructure.",
-        mappedTo: ["QUDT:Power", "MacroDesk:DataCenterLoad"],
-        sources: ["Utility filings", "Company disclosures", "Grid interconnection queues"],
-        relationships: ["DRIVES PowerBurn", "CONSTRAINED_BY GridCapacity", "AFFECTS GasDemand"],
-    },
-    {
-        id: "weld-shortage",
-        name: "Certified Welder Shortage",
-        domain: "Labor / Welding",
-        status: "Proposed",
-        confidence: 0.81,
-        definition: "A regional shortage of certified welders needed for pipeline, LNG, power, or data-center construction.",
-        mappedTo: ["SOC:Welders", "O*NET:WeldingSkills", "MacroDesk:LaborConstraint"],
-        sources: ["BLS", "O*NET", "Project labor reports"],
-        relationships: ["DELAYS ConstructionProject", "RAISES LaborCost", "AFFECTS InfrastructureCapacity"],
-    },
-    {
-        id: "reg-exception",
-        name: "Permitting Exception",
-        domain: "Regulatory / Decision Graph",
-        status: "Curated",
-        confidence: 0.9,
-        definition: "A regulatory, permitting, or compliance issue that alters or overrides a forecast, project assumption, or trade signal.",
-        mappedTo: ["PROV-O:Activity", "MacroDesk:DecisionException"],
-        sources: ["Regulations.gov", "FERC filings", "State permitting dockets"],
-        relationships: ["RAISED_EXCEPTION Decision", "AFFECTS ProjectTimeline", "OVERRIDES PlaybookAssumption"],
-    },
-];
+
 
 const domains = [
     { name: "Natural Gas", icon: Database, count: 128 },
@@ -93,13 +38,7 @@ const domains = [
     { name: "Decision Graph", icon: GitBranch, count: 43 },
 ];
 
-const relationshipGraph = [
-    ["Certified Welder Shortage", "DELAYS", "Pipeline Expansion"],
-    ["Pipeline Expansion", "AFFECTS", "Regional Supply Capacity"],
-    ["Regional Supply Capacity", "IMPACTS", "Basis Spread"],
-    ["Basis Spread", "TRIGGERS", "Trade Recommendation"],
-    ["Trade Recommendation", "RECORDED_IN", "Decision Graph"],
-];
+
 
 const statusClasses = {
     Curated: "bg-emerald-400/10 text-emerald-400 border-emerald-400/30",

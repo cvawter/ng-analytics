@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Database, Network, ArrowLeft, Terminal } from 'lucide-react';
+import { Database, Network, ArrowLeft, Terminal, Cpu, Share2 } from 'lucide-react';
 import { Card, CardContent } from './components/ui/card';
 import EIANaturalGasReports from './ngreports';
 import MacroDeskOntologyExplorer from './ontology-explorer';
+import AIChatInterface from './chat';
+import GraphExplorer from './graph-explorer';
 
 function LandingPage({ setView }) {
   return (
     <div className="min-h-screen bg-[#0d0f14] text-[#c8cdd8] font-sans flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f0a500]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div
@@ -31,40 +32,50 @@ function LandingPage({ setView }) {
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl relative z-10">
-        <motion.button
-          onClick={() => setView('reports')}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="text-left w-full focus:outline-none"
-        >
+        <motion.button onClick={() => setView('reports')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
                 <Database className="h-7 w-7" />
               </div>
               <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Natural Gas Reports</h2>
-              <p className="text-[15px] leading-relaxed text-[#8a94a6]">
-                Explore the complete historical catalog of EIA publications. Access release schedules, data coverage matrices, and underlying statistical types.
-              </p>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Explore the complete historical catalog of EIA publications. Access release schedules and data matrices.</p>
             </CardContent>
           </Card>
         </motion.button>
 
-        <motion.button
-          onClick={() => setView('ontology')}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="text-left w-full focus:outline-none"
-        >
+        <motion.button onClick={() => setView('ontology')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
                 <Network className="h-7 w-7" />
               </div>
               <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Ontology Explorer</h2>
-              <p className="text-[15px] leading-relaxed text-[#8a94a6]">
-                Navigate the cross-domain knowledge graph. Review mappings, approve terms for the curated layer, and trace reasoning paths.
-              </p>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Navigate the cross-domain knowledge graph. Review mappings and trace reasoning paths.</p>
+            </CardContent>
+          </Card>
+        </motion.button>
+
+        <motion.button onClick={() => setView('chat')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
+                <Cpu className="h-7 w-7" />
+              </div>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">AI Graph Analyst</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Interact with our GraphRAG backend. Query the knowledge graph using natural language.</p>
+            </CardContent>
+          </Card>
+        </motion.button>
+
+        <motion.button onClick={() => setView('graph')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
+                <Share2 className="h-7 w-7" />
+              </div>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Graph Visualizer</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Interactive 2D physics graph. Zoom, pan, and drag nodes to explore Neo4j data structures.</p>
             </CardContent>
           </Card>
         </motion.button>
@@ -80,42 +91,36 @@ export default function App() {
     <div className="min-h-screen bg-[#0d0f14]">
       <AnimatePresence mode="wait">
         {currentView === 'home' && (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <LandingPage setView={setCurrentView} />
           </motion.div>
         )}
         
         {currentView === 'reports' && (
-          <motion.div
-            key="reports"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="relative"
-          >
+          <motion.div key="reports" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
             <EIANaturalGasReports />
           </motion.div>
         )}
         
         {currentView === 'ontology' && (
-          <motion.div
-            key="ontology"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="relative"
-          >
+          <motion.div key="ontology" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
             <MacroDeskOntologyExplorer />
+          </motion.div>
+        )}
+
+        {currentView === 'chat' && (
+          <motion.div key="chat" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative h-screen">
+            <AIChatInterface />
+          </motion.div>
+        )}
+
+        {currentView === 'graph' && (
+          <motion.div key="graph" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative h-screen">
+            <GraphExplorer />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Global Back Navigation FAB */}
       {currentView !== 'home' && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}

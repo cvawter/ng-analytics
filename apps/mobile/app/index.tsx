@@ -52,6 +52,37 @@ export default function HubScreen() {
             Navigate the cross-domain knowledge graph. Review mappings, approve terms for the curated layer, and trace reasoning paths.
           </Text>
         </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.card,
+            pressed && styles.cardPressed
+          ]}
+          onPress={() => router.push('/chat')}
+        >
+          <View style={styles.cardIconBox}>
+            <Feather name="cpu" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>AI Graph Analyst</Text>
+          <Text style={styles.cardDesc}>
+            Interact with our GraphRAG backend. Query the knowledge graph using natural language and receive context-aware responses.
+          </Text>
+        </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.card,
+            pressed && styles.cardPressed
+          ]}
+          onPress={() => router.push('/graph-explorer')}
+        >
+          <View style={styles.cardIconBox}>
+            <Feather name="share-2" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>Graph Visualizer</Text>
+          <Text style={styles.cardDesc}>
+            Interactive 2D physics graph. Zoom, pan, and drag nodes to explore Neo4j data structures natively on your device.
+          </Text>
+        </Pressable>
       </View>
     </ScrollView>
   );

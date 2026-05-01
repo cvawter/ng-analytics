@@ -16,6 +16,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ title: 'MacroDesk Hub' }} />
         <Stack.Screen name="reports" options={{ title: 'Natural Gas Reports' }} />
         <Stack.Screen name="ontology" options={{ title: 'Ontology Explorer' }} />
+        <Stack.Screen name="chat" options={{ title: 'AI Analyst' }} />
+        <Stack.Screen name="graph-explorer" options={{ title: 'Graph Visualizer' }} />
       </Stack>
       <StatusBar style="light" />
     </>

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { ontologyTerms, relationshipGraph } from "@ng-analytics/shared";
+import { ontologyTerms, relationshipGraph, externalOntologies, ontologyCategories } from "@ng-analytics/shared";
 import { motion } from "framer-motion";
+import OntologyGraphViewer from "./ontology-graph-viewer";
 import {
     Search,
     Network,
@@ -23,6 +24,10 @@ import {
     Hammer,
     Zap,
     LineChart,
+    Library,
+    ExternalLink,
+    Tag,
+    GitFork,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -47,10 +52,27 @@ const statusClasses = {
     Mapped: "bg-purple-400/10 text-purple-400 border-purple-400/30",
 };
 
+const categoryColors = {
+    "Energy": "text-emerald-400 bg-emerald-400/10 border-emerald-400/30",
+    "Finance & Trading": "text-blue-400 bg-blue-400/10 border-blue-400/30",
+    "Provenance": "text-purple-400 bg-purple-400/10 border-purple-400/30",
+    "Measurement": "text-[#f0a500] bg-[#f0a500]/10 border-[#f0a500]/30",
+    "Geospatial": "text-cyan-400 bg-cyan-400/10 border-cyan-400/30",
+    "Temporal": "text-rose-400 bg-rose-400/10 border-rose-400/30",
+    "Knowledge Organization": "text-violet-400 bg-violet-400/10 border-violet-400/30",
+    "Metadata": "text-slate-400 bg-slate-400/10 border-slate-400/30",
+    "Energy Grid": "text-lime-400 bg-lime-400/10 border-lime-400/30",
+    "Upper / Foundational": "text-indigo-400 bg-indigo-400/10 border-indigo-400/30",
+    "General Purpose": "text-amber-400 bg-amber-400/10 border-amber-400/30",
+};
+
 export default function MacroDeskOntologyExplorer() {
     const [query, setQuery] = useState("");
     const [domain, setDomain] = useState("All");
     const [selectedId, setSelectedId] = useState("ng-working-gas");
+    const [extCategory, setExtCategory] = useState("All");
+    const [extSearch, setExtSearch] = useState("");
+    const [graphOntology, setGraphOntology] = useState(null);
 
     const filteredTerms = useMemo(() => {
         const q = query.toLowerCase();
@@ -68,6 +90,7 @@ export default function MacroDeskOntologyExplorer() {
     const selected = ontologyTerms.find((term) => term.id === selectedId) || filteredTerms[0] || ontologyTerms[0];
 
     return (
+        <>
         <div className="min-h-screen bg-[#0d0f14] text-[#c8cdd8] font-sans pb-20">
             <div className="mx-auto max-w-[1280px] p-6">
                 <motion.div
@@ -311,7 +334,120 @@ export default function MacroDeskOntologyExplorer() {
                         </div>
                     </div>
                 </div>
+
+                {/* External Ontology Reference Library */}
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="mt-8"
+                >
+                    <div className="mb-6 flex items-center gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#f0a500]/10 text-[#f0a500]">
+                            <Library className="h-5 w-5" />
+                        </div>
+                        <div>
+                            <h2 className="text-[18px] font-bold text-[#eef0f4]">Industry Ontology Reference Library</h2>
+                            <p className="text-[12px] text-[#6b7280]">Third-party and industry-standard ontologies for abstract base types in the NG Macroeconomics Graph.</p>
+                        </div>
+                    </div>
+
+                    <div className="mb-5 flex flex-col gap-3 sm:flex-row">
+                        <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 flex-1">
+                            <Search className="h-4 w-4 text-[#6b7280] shrink-0" />
+                            <input
+                                value={extSearch}
+                                onChange={(e) => setExtSearch(e.target.value)}
+                                placeholder="Search ontologies, base types, relevance..."
+                                className="w-full bg-transparent text-[13px] text-[#eef0f4] placeholder-[#6b7280] outline-none"
+                            />
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {ontologyCategories.map((cat) => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setExtCategory(cat)}
+                                    className={`rounded-md px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-all ${
+                                        extCategory === cat ? "bg-[#f0a500]/15 border border-[#f0a500]/40 text-[#f0a500]" : "border border-white/[0.08] bg-white/[0.03] text-[#6b7280] hover:text-[#eef0f4]"
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {externalOntologies
+                            .filter((ont) => {
+                                const q = extSearch.toLowerCase();
+                                const matchesSearch = !q ||
+                                    ont.name.toLowerCase().includes(q) ||
+                                    ont.fullName.toLowerCase().includes(q) ||
+                                    ont.relevance.toLowerCase().includes(q) ||
+                                    ont.usage.toLowerCase().includes(q) ||
+                                    ont.baseTypes.join(" ").toLowerCase().includes(q);
+                                const matchesCat = extCategory === "All" || ont.category === extCategory;
+                                return matchesSearch && matchesCat;
+                            })
+                            .map((ont) => (
+                                <Card key={ont.id} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.035] transition-colors">
+                                    <CardContent className="p-5">
+                                        <div className="mb-3 flex items-start justify-between gap-2">
+                                            <div>
+                                                <div className="text-[15px] font-bold text-[#eef0f4]">{ont.name}</div>
+                                                <div className="mt-0.5 font-mono text-[11px] text-[#6b7280]">{ont.namespace}</div>
+                                            </div>
+                                            <div className="flex gap-2 items-center">
+                                                <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${ categoryColors[ont.category] || "text-[#9ca3af] bg-white/5 border-white/10" }`}>
+                                                    {ont.category}
+                                                </span>
+                                                <a href={ont.url} target="_blank" rel="noreferrer" className="text-[#6b7280] hover:text-[#f0a500] transition-colors">
+                                                    <ExternalLink className="h-4 w-4" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-3 text-[11px] text-[#6b7280] italic">{ont.fullName}</div>
+
+                                        <div className="mb-3">
+                                            <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-[#f0a500]">
+                                                <Tag className="h-3 w-3" /> Base Types
+                                            </div>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {ont.baseTypes.map((t) => (
+                                                    <span key={t} className="rounded-md border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[10px] text-[#c8cdd8]">{t}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-2 text-[12px] leading-relaxed text-[#9ca3af]">
+                                            <span className="font-semibold text-[#c8cdd8]">Relevance: </span>{ont.relevance}
+                                        </div>
+                                        <div className="rounded-lg border border-[#f0a500]/10 bg-[#f0a500]/5 p-2.5 text-[11px] leading-relaxed text-[#c8cdd8]">
+                                            <span className="font-mono font-bold text-[#f0a500]">USAGE → </span>{ont.usage}
+                                        </div>
+                                        <button
+                                            onClick={() => setGraphOntology(ont)}
+                                            className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border border-[#f0a500]/20 bg-[#f0a500]/5 hover:bg-[#f0a500]/10 hover:border-[#f0a500]/40 px-4 py-2.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#f0a500] transition-all"
+                                        >
+                                            <GitFork className="h-3.5 w-3.5" /> Explore Type Graph
+                                        </button>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                    </div>
+                </motion.div>
             </div>
         </div>
+
+        {/* Graph Viewer Modal */}
+        {graphOntology && (
+            <OntologyGraphViewer
+                ontology={graphOntology}
+                onClose={() => setGraphOntology(null)}
+            />
+        )}
+    </>
     );
 }

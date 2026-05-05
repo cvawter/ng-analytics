@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Database, Network, ArrowLeft, Terminal, Cpu, Share2 } from 'lucide-react';
+import { Database, Network, ArrowLeft, Terminal, Cpu, Share2, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from './components/ui/card';
 import EIANaturalGasReports from './ngreports';
 import MacroDeskOntologyExplorer from './ontology-explorer';
 import AIChatInterface from './chat';
 import GraphExplorer from './graph-explorer';
+import AutoResearcher from './auto-research';
+import Markets from './markets';
 
 function LandingPage({ setView }) {
   return (
@@ -79,6 +81,30 @@ function LandingPage({ setView }) {
             </CardContent>
           </Card>
         </motion.button>
+
+        <motion.button onClick={() => setView('autoresearch')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-gradient-to-r from-white/[0.02] to-[#f0a500]/5 hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
+                <Terminal className="h-7 w-7" />
+              </div>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Auto Research</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Background hypothesis generation agent. Review proposals to continuously build the LLM Context Wiki.</p>
+            </CardContent>
+          </Card>
+        </motion.button>
+
+        <motion.button onClick={() => setView('markets')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
+                <TrendingUp className="h-7 w-7" />
+              </div>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Market Data</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Live Spot pricing and 12-month forward Futures Curve for Henry Hub Natural Gas.</p>
+            </CardContent>
+          </Card>
+        </motion.button>
       </div>
     </div>
   );
@@ -117,6 +143,18 @@ export default function App() {
         {currentView === 'graph' && (
           <motion.div key="graph" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative h-screen">
             <GraphExplorer />
+          </motion.div>
+        )}
+
+        {currentView === 'autoresearch' && (
+          <motion.div key="autoresearch" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
+            <AutoResearcher />
+          </motion.div>
+        )}
+
+        {currentView === 'markets' && (
+          <motion.div key="markets" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
+            <Markets />
           </motion.div>
         )}
       </AnimatePresence>

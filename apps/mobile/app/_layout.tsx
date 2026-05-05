@@ -18,6 +18,9 @@ export default function RootLayout() {
         <Stack.Screen name="ontology" options={{ title: 'Ontology Explorer' }} />
         <Stack.Screen name="chat" options={{ title: 'AI Analyst' }} />
         <Stack.Screen name="graph-explorer" options={{ title: 'Graph Visualizer' }} />
+        <Stack.Screen name="auto-research" options={{ title: 'Auto Research' }} />
+        <Stack.Screen name="markets" options={{ title: 'Market Data' }} />
+        <Stack.Screen name="ontology-graph" options={{ title: 'Type Graph' }} />
       </Stack>
       <StatusBar style="light" />
     </>

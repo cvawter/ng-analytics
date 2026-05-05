@@ -83,6 +83,38 @@ export default function HubScreen() {
             Interactive 2D physics graph. Zoom, pan, and drag nodes to explore Neo4j data structures natively on your device.
           </Text>
         </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.card,
+            pressed && styles.cardPressed
+          ]}
+          onPress={() => router.push('/auto-research')}
+        >
+          <View style={styles.cardIconBox}>
+            <Feather name="activity" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>Auto Research</Text>
+          <Text style={styles.cardDesc}>
+            Background hypothesis generation agent. Review proposals to continuously build the LLM Context Wiki.
+          </Text>
+        </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.card,
+            pressed && styles.cardPressed
+          ]}
+          onPress={() => router.push('/markets')}
+        >
+          <View style={styles.cardIconBox}>
+            <Feather name="trending-up" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>Market Data</Text>
+          <Text style={styles.cardDesc}>
+            Live Spot pricing and 12-month forward Futures Curve for Henry Hub Natural Gas.
+          </Text>
+        </Pressable>
       </View>
     </ScrollView>
   );

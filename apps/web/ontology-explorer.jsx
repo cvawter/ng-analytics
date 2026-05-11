@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { ontologyTerms, relationshipGraph, externalOntologies, ontologyCategories } from "@ng-analytics/shared";
 import { motion } from "framer-motion";
 import OntologyGraphViewer from "./ontology-graph-viewer";
+import InAppBrowser from "./in-app-browser";
 import {
     Search,
     Network,
@@ -73,6 +74,7 @@ export default function MacroDeskOntologyExplorer() {
     const [extCategory, setExtCategory] = useState("All");
     const [extSearch, setExtSearch] = useState("");
     const [graphOntology, setGraphOntology] = useState(null);
+    const [browserUrl, setBrowserUrl] = useState(null);
 
     const filteredTerms = useMemo(() => {
         const q = query.toLowerCase();
@@ -402,9 +404,9 @@ export default function MacroDeskOntologyExplorer() {
                                                 <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${ categoryColors[ont.category] || "text-[#9ca3af] bg-white/5 border-white/10" }`}>
                                                     {ont.category}
                                                 </span>
-                                                <a href={ont.url} target="_blank" rel="noreferrer" className="text-[#6b7280] hover:text-[#f0a500] transition-colors">
+                                                <button onClick={() => setBrowserUrl(ont.url)} className="text-[#6b7280] hover:text-[#f0a500] transition-colors">
                                                     <ExternalLink className="h-4 w-4" />
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
 
@@ -448,6 +450,7 @@ export default function MacroDeskOntologyExplorer() {
                 onClose={() => setGraphOntology(null)}
             />
         )}
+        {browserUrl && <InAppBrowser url={browserUrl} title="Ontology Specification" onClose={() => setBrowserUrl(null)} />}
     </>
     );
 }

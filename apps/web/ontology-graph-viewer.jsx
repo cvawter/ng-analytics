@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { X, ZoomIn, ZoomOut, RefreshCw, ExternalLink, Copy, Check } from "lucide-react";
+import InAppBrowser from "./in-app-browser";
 
 const NODE_RADIUS = 32;
 
@@ -127,6 +128,7 @@ export default function OntologyGraphViewer({ ontology, onClose }) {
   const [draggingNode, setDraggingNode] = useState(null);
   const [selectedNode, setSelectedNode] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [browserUrl, setBrowserUrl] = useState(null);
   const isPanning = useRef(false);
   const lastPan = useRef({ x: 0, y: 0 });
   const colorMap = buildColorMap(ontology);
@@ -172,6 +174,7 @@ export default function OntologyGraphViewer({ ontology, onClose }) {
   const handleWheel = (e) => { e.preventDefault(); setZoom((z) => Math.min(3, Math.max(0.3, z - e.deltaY * 0.001))); };
 
   return (
+    <>
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4" onClick={onClose}>
       <div className="w-full max-w-5xl max-h-[90vh] flex flex-col bg-[#0d1117] border border-white/10 rounded-3xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
 
@@ -182,9 +185,9 @@ export default function OntologyGraphViewer({ ontology, onClose }) {
             <h2 className="text-lg font-bold text-white">{ontology.name} — <span className="text-[#9ca3af] font-normal text-base">{ontology.fullName}</span></h2>
           </div>
           <div className="flex items-center gap-1.5">
-            <a href={ontology.url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[11px] text-[#6b7280] hover:text-[#f0a500] px-2.5 py-1.5 rounded-lg border border-white/5 hover:border-[#f0a500]/30 transition-colors">
+            <button onClick={() => setBrowserUrl(ontology.url)} className="flex items-center gap-1 text-[11px] text-[#6b7280] hover:text-[#f0a500] px-2.5 py-1.5 rounded-lg border border-white/5 hover:border-[#f0a500]/30 transition-colors">
               <ExternalLink className="h-3 w-3" /> Spec
-            </a>
+            </button>
             {[{ icon: ZoomIn, fn: () => setZoom(z => Math.min(3, z + 0.2)) }, { icon: ZoomOut, fn: () => setZoom(z => Math.max(0.3, z - 0.2)) }, { icon: RefreshCw, fn: () => { setGraph(buildGraph(ontology)); setZoom(1); setPan({ x: 0, y: 0 }); } }, { icon: X, fn: onClose }].map(({ icon: Icon, fn }, i) => (
               <button key={i} onClick={fn} className="p-1.5 rounded-lg border border-white/5 text-[#6b7280] hover:text-[#f0a500] hover:border-[#f0a500]/30 transition-colors">
                 <Icon className="h-4 w-4" />
@@ -344,5 +347,8 @@ export default function OntologyGraphViewer({ ontology, onClose }) {
         </div>
       </div>
     </div>
+
+    {browserUrl && <InAppBrowser url={browserUrl} title={ontology.name + ' Specification'} onClose={() => setBrowserUrl(null)} />}
+  </>
   );
 }

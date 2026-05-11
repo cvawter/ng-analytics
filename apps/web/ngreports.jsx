@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { reports } from "@ng-analytics/shared";
+import InAppBrowser from "./in-app-browser";
 
 
 
@@ -69,6 +70,7 @@ export default function EIANaturalGasReports() {
   const [filterFreq, setFilterFreq] = useState("All");
   const [search, setSearch] = useState("");
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [browserUrl, setBrowserUrl] = useState(null);
 
   const handleSort = (key) => {
     if (sortKey === key) {
@@ -113,6 +115,7 @@ export default function EIANaturalGasReports() {
   }, [sortKey, sortDir, filterFreq, search]);
 
   return (
+    <>
     <div style={{
       minHeight: "100vh",
       background: "#0d0f14",
@@ -306,10 +309,8 @@ export default function EIANaturalGasReports() {
                     >
                       {/* Report Name */}
                       <td style={{ padding: "11px 14px", verticalAlign: "top" }}>
-                        <a
-                          href={report.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={() => setBrowserUrl(report.url)}
                           style={{
                             color: isHovered ? "#f0a500" : "#d1d5db",
                             textDecoration: "none",
@@ -318,10 +319,15 @@ export default function EIANaturalGasReports() {
                             lineHeight: 1.35,
                             display: "block",
                             transition: "color 0.15s",
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            padding: 0,
                           }}
                         >
                           {report.name}
-                        </a>
+                        </button>
                       </td>
 
                       {/* Acronym */}
@@ -405,5 +411,6 @@ export default function EIANaturalGasReports() {
         </div>
       </div>
     </div>
-  );
+    {browserUrl && <InAppBrowser url={browserUrl} title="EIA Report" onClose={() => setBrowserUrl(null)} />}
+  </>);
 }

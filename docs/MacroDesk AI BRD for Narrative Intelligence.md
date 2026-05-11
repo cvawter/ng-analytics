@@ -903,7 +903,7 @@ within the semantic graph.
 
 ---
 
-# Strategic Positioning
+## Strategic Positioning
 
 MacroDesk-AI shall evolve beyond a traditional analytics platform into:
 

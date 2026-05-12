@@ -348,6 +348,244 @@ Recommended as the default enterprise cloud platform.
 
 ---
 
+# Ollama vs vLLM vs SGLang Comparison
+
+## High-Level Comparison
+
+| Capability | Ollama | vLLM | SGLang |
+|---|---|---|---|
+| Primary Purpose | Local development | High-throughput inference | Structured agentic workflows |
+| Ease of Setup | Extremely easy | Moderate | Moderate to advanced |
+| Best Use Case | Developer laptops | Production inference servers | Structured reasoning pipelines |
+| Multi-GPU Support | Limited | Strong | Strong |
+| Continuous Batching | Limited | Excellent | Excellent |
+| Structured Generation | Basic | Moderate | Excellent |
+| JSON-Constrained Output | Limited | Moderate | Excellent |
+| Prefix Caching | Limited | Good | Excellent |
+| Throughput | Moderate | Very high | High |
+| Latency Optimization | Good | Excellent | Excellent |
+| Production Readiness | Small to medium deployments | Enterprise-grade | Enterprise-grade |
+| Concurrent Multi-Agent Workloads | Moderate | Excellent | Excellent |
+| OpenAI-Compatible APIs | Yes | Yes | Partial / configurable |
+| Embabel Integration Fit | Good | Very good | Excellent |
+| Temporal Workflow Fit | Good | Excellent | Excellent |
+| GraphRAG Support | Good | Excellent | Excellent |
+| Cost Efficiency | Good | Excellent | Excellent |
+| Operational Complexity | Low | Medium | Medium to high |
+| Recommended Deployment | Local workstation | GPU inference cluster | Structured AI orchestration cluster |
+
+---
+
+# Recommended Usage Guidance
+
+## When to Use Ollama
+
+Use Ollama when:
+
+- developing locally
+- prototyping workflows
+- running local analyst tools
+- testing GraphRAG pipelines
+- supporting offline workflows
+- prioritizing simplicity
+- experimenting with local models
+
+### Recommended Roles
+
+| Role | Recommendation |
+|---|---|
+| Developer laptops | Excellent |
+| Prototype environments | Excellent |
+| Small-team environments | Excellent |
+| Enterprise production serving | Limited |
+| Large-scale ingestion | Not ideal |
+
+---
+
+## When to Use vLLM
+
+Use vLLM when:
+
+- serving production inference workloads
+- supporting high-throughput ingestion
+- scaling concurrent agents
+- maximizing GPU utilization
+- supporting large GraphRAG pipelines
+- serving many users simultaneously
+
+### Recommended Roles
+
+| Role | Recommendation |
+|---|---|
+| Production inference | Excellent |
+| Multi-agent serving | Excellent |
+| High-volume extraction | Excellent |
+| Local experimentation | Moderate |
+| Structured extraction pipelines | Good |
+
+---
+
+## When to Use SGLang
+
+Use SGLang when:
+
+- building planner / critic workflows
+- enforcing schema-constrained generation
+- running repeated structured prompts
+- building ontology extraction workflows
+- enriching context graphs
+- optimizing repeated reasoning pipelines
+- coordinating advanced agentic workflows
+
+### Recommended Roles
+
+| Role | Recommendation |
+|---|---|
+| Structured AI workflows | Excellent |
+| Ontology extraction | Excellent |
+| Graph enrichment | Excellent |
+| Planner / critic orchestration | Excellent |
+| General local experimentation | Moderate |
+
+---
+
+# Recommended Deployment Topologies
+
+## Topology 1 — Local Development
+
+```text
+Developer Laptop
+   ├── Ollama
+   ├── Gemma 4
+   ├── Neo4j
+   └── LiteLLM
+```
+
+### Best For
+
+- local experimentation
+- rapid iteration
+- offline workflows
+- early prototypes
+
+---
+
+## Topology 2 — Production Local AI Cluster
+
+```text
+LiteLLM Router
+   ├── vLLM Cluster
+   │      ├── Gemma 4
+   │      ├── Qwen
+   │      └── Mistral
+   └── Ollama
+```
+
+### Best For
+
+- production GraphRAG
+- ingestion pipelines
+- multi-agent serving
+- scalable local inference
+
+---
+
+## Topology 3 — Structured Agentic AI Platform
+
+```text
+Embabel
+   ├── LiteLLM
+   ├── SGLang
+   ├── vLLM
+   └── Premium Frontier Models
+```
+
+### Best For
+
+- planner / critic workflows
+- ontology extraction
+- graph enrichment
+- structured generation
+- advanced reasoning pipelines
+
+---
+
+# Operational Tradeoff Analysis
+
+| Concern | Ollama | vLLM | SGLang |
+|---|---|---|---|
+| Simplicity | Excellent | Moderate | Moderate |
+| Throughput | Moderate | Excellent | Excellent |
+| Structured AI | Limited | Good | Excellent |
+| Dev Experience | Excellent | Good | Good |
+| Production Scalability | Moderate | Excellent | Excellent |
+| Embabel Alignment | Good | Very good | Excellent |
+| Cost Efficiency | Good | Excellent | Excellent |
+| Multi-Agent Concurrency | Moderate | Excellent | Excellent |
+| Schema-Constrained Workflows | Limited | Moderate | Excellent |
+| Best Long-Term Fit | Development | Production serving | Agentic orchestration |
+
+---
+
+# Recommended Default Stack
+
+## Recommended Initial Stack
+
+| Layer | Recommendation |
+|---|---|
+| Local Development | Ollama |
+| Model Gateway | LiteLLM |
+| Production Local Inference | vLLM |
+| Structured AI Workflows | SGLang |
+| Premium Escalation | Claude / GPT / Gemini |
+| Agent Framework | Embabel |
+| Workflow Engine | Temporal |
+| Graph Layer | Neo4j |
+| Lakehouse | Iceberg |
+
+---
+
+# Recommended Decision Tree
+
+```text
+Need simple local development?
+   └── Use Ollama
+
+Need high-throughput inference?
+   └── Use vLLM
+
+Need structured reasoning pipelines?
+   └── Use SGLang
+
+Need institutional-grade reasoning?
+   └── Escalate to frontier cloud models
+```
+
+---
+
+# Recommended Architecture Decision
+
+The platform should:
+
+- use Ollama for simplicity and local experimentation
+- use vLLM for scalable production inference
+- use SGLang for advanced structured reasoning workflows
+- use LiteLLM for routing and abstraction
+- use premium frontier models only when needed
+
+This provides:
+
+- maximum cost efficiency
+- scalable inference
+- strong agentic orchestration
+- structured AI workflows
+- local privacy
+- enterprise extensibility
+- provider portability
+- operational flexibility
+
+---
+
 # Recommended Design Principle
 
 Use:
@@ -877,6 +1115,293 @@ Use:
 - Temporal for durability
 - Embabel for orchestration
 - Human review for high-risk decisions
+
+---
+
+# BRD / FRD / PRD / Roadmap Requirements for Model Selection and Routing
+
+---
+
+# BRD Requirements
+
+## Business Goals
+
+The platform shall:
+
+- minimize AI inference cost
+- support hybrid local and cloud AI execution
+- reduce dependence on expensive frontier models
+- support vendor-agnostic model execution
+- dynamically route workloads based on risk, latency, and cost
+- support scalable multi-agent AI workloads
+- support explainable and auditable AI decisions
+- optimize inference efficiency for large-scale ingestion pipelines
+- support offline-capable analyst workflows
+- enable enterprise-grade governance and observability
+
+---
+
+## Business Capabilities
+
+| Capability | Description |
+|---|---|
+| Hybrid AI Routing | Dynamically route AI requests between local and hosted models |
+| Cost-Aware Model Selection | Select models based on token cost, latency, and workload type |
+| Risk-Aware Escalation | Escalate sensitive workflows to premium models |
+| Vendor Abstraction | Prevent lock-in to a single model provider |
+| Local AI Execution | Support local execution with Ollama, vLLM, and SGLang |
+| Structured AI Pipelines | Support schema-constrained AI workflows |
+| Multi-Agent AI Infrastructure | Coordinate specialized AI agents |
+| AI Observability | Monitor token cost, latency, failures, and routing |
+| AI Governance | Support auditability and human approvals |
+| AI Fallback Routing | Fail over between providers and local models |
+
+---
+
+## Strategic Requirements
+
+The platform should:
+
+- support frontier AI providers
+- support open-weight local models
+- support enterprise governance
+- support scalable ingestion pipelines
+- support distributed extraction workflows
+- support GraphRAG and hybrid retrieval
+- support structured generation workflows
+- support model experimentation and benchmarking
+- support model A/B testing
+- support long-term provider portability
+
+---
+
+# FRD Requirements
+
+## Functional Requirements
+
+### LLM Gateway and Routing
+
+| ID | Requirement |
+|---|---|
+| FR-LLM-001 | The platform shall provide a unified LLM gateway layer using LiteLLM or equivalent. |
+| FR-LLM-002 | The platform shall support routing requests to Ollama, vLLM, SGLang, AWS Bedrock, OpenAI, Anthropic, and Gemini. |
+| FR-LLM-003 | The platform shall support provider failover and retry logic. |
+| FR-LLM-004 | The platform shall support dynamic model selection based on workload type. |
+| FR-LLM-005 | The platform shall support configurable routing policies. |
+| FR-LLM-006 | The platform shall support risk-aware model escalation. |
+| FR-LLM-007 | The platform shall support cost-aware routing decisions. |
+| FR-LLM-008 | The platform shall support latency-aware routing decisions. |
+| FR-LLM-009 | The platform shall support model capability metadata management. |
+| FR-LLM-010 | The platform shall support structured logging of AI requests and responses. |
+
+---
+
+### Local AI Execution
+
+| ID | Requirement |
+|---|---|
+| FR-LOCAL-001 | The platform shall support local execution using Ollama. |
+| FR-LOCAL-002 | The platform shall support production local inference using vLLM. |
+| FR-LOCAL-003 | The platform shall support structured generation workflows using SGLang. |
+| FR-LOCAL-004 | The platform shall support open-weight model execution. |
+| FR-LOCAL-005 | The platform shall support GPU-based inference acceleration. |
+| FR-LOCAL-006 | The platform shall support quantized local models. |
+| FR-LOCAL-007 | The platform shall support multimodal local models. |
+| FR-LOCAL-008 | The platform shall support offline-capable inference workflows. |
+| FR-LOCAL-009 | The platform shall support distributed local inference clusters. |
+| FR-LOCAL-010 | The platform shall support local GraphRAG processing. |
+
+---
+
+### Cost Optimization
+
+| ID | Requirement |
+|---|---|
+| FR-COST-001 | The platform shall track token usage by provider and model. |
+| FR-COST-002 | The platform shall track inference cost by workflow. |
+| FR-COST-003 | The platform shall support budget-aware routing. |
+| FR-COST-004 | The platform shall prefer local SLMs for low-risk workloads. |
+| FR-COST-005 | The platform shall escalate to premium models only when required. |
+| FR-COST-006 | The platform shall support model benchmarking and comparison. |
+| FR-COST-007 | The platform shall support workload-specific model profiles. |
+| FR-COST-008 | The platform shall support configurable escalation thresholds. |
+
+---
+
+### vLLM vs SGLang Functional Requirements
+
+| ID | Requirement |
+|---|---|
+| FR-VLLM-001 | vLLM shall be supported for high-throughput production inference. |
+| FR-VLLM-002 | vLLM shall support concurrent multi-agent workloads. |
+| FR-VLLM-003 | vLLM shall support continuous batching and KV cache optimization. |
+| FR-SGLANG-001 | SGLang shall support schema-constrained generation. |
+| FR-SGLANG-002 | SGLang shall support planner / critic workflows. |
+| FR-SGLANG-003 | SGLang shall support repeated structured reasoning pipelines. |
+| FR-SGLANG-004 | SGLang shall support ontology extraction and graph enrichment workflows. |
+
+---
+
+### Embabel and Temporal Integration
+
+| ID | Requirement |
+|---|---|
+| FR-AGENT-001 | Embabel agents shall use LiteLLM for model abstraction and routing. |
+| FR-AGENT-002 | Temporal workflows shall orchestrate distributed AI extraction pipelines. |
+| FR-AGENT-003 | Temporal shall support retryable AI activities. |
+| FR-AGENT-004 | Temporal shall support human approval checkpoints for premium escalation. |
+| FR-AGENT-005 | Embabel shall support planner / critic model separation. |
+| FR-AGENT-006 | Embabel shall support agent-specific model selection policies. |
+
+---
+
+# PRD Requirements
+
+## Product Requirements
+
+### User Experience Requirements
+
+The platform should provide:
+
+- transparent AI routing visibility
+- explainable model selection
+- AI cost visibility dashboards
+- routing policy management
+- local vs cloud execution controls
+- model benchmarking dashboards
+- AI observability dashboards
+- audit trails for AI decisions
+- configurable escalation policies
+- inference latency monitoring
+
+---
+
+## Product Features
+
+| Feature | Description |
+|---|---|
+| AI Model Router | Unified routing across local and hosted models |
+| Cost Optimization Engine | Minimize token and inference costs |
+| AI Governance Dashboard | Audit and approval workflows |
+| Model Benchmarking Suite | Compare models by cost and quality |
+| Routing Policy Engine | Configure escalation and routing rules |
+| AI Telemetry Dashboard | Track cost, latency, throughput, and failures |
+| Local AI Workbench | Run local AI workflows via Ollama / vLLM |
+| Structured AI Pipeline Engine | Execute schema-constrained workflows via SGLang |
+| AI Provider Abstraction Layer | Decouple applications from providers |
+| AI Risk Escalation Engine | Escalate sensitive workflows to premium models |
+
+---
+
+## Non-Functional Requirements
+
+| Category | Requirement |
+|---|---|
+| Scalability | Support concurrent multi-agent inference |
+| Reliability | Support provider failover and retries |
+| Security | Support enterprise-grade authentication and authorization |
+| Portability | Support provider-independent model routing |
+| Observability | Support centralized AI telemetry |
+| Performance | Support low-latency local inference |
+| Cost Efficiency | Prefer local execution whenever appropriate |
+| Explainability | Support AI audit trails and decision lineage |
+
+---
+
+# Roadmap Requirements
+
+## Phase 1 — Local AI Foundation
+
+### Objectives
+
+- establish local-first AI infrastructure
+- support offline-capable development
+- reduce hosted inference costs
+
+### Deliverables
+
+- Ollama integration
+- Gemma 4 local deployment
+- LiteLLM gateway
+- initial routing policies
+- local GraphRAG workflows
+- token cost tracking
+- model benchmarking framework
+
+---
+
+## Phase 2 — Production AI Infrastructure
+
+### Objectives
+
+- support scalable production inference
+- improve throughput and orchestration
+
+### Deliverables
+
+- vLLM deployment
+- multi-GPU inference support
+- AI observability dashboards
+- distributed inference orchestration
+- routing telemetry
+- retry and fallback policies
+- workload-aware routing
+
+---
+
+## Phase 3 — Structured AI Pipelines
+
+### Objectives
+
+- support advanced agentic workflows
+- improve structured extraction and reasoning
+
+### Deliverables
+
+- SGLang integration
+- structured JSON workflows
+- ontology extraction pipelines
+- planner / critic orchestration
+- graph enrichment workflows
+- schema-constrained generation
+
+---
+
+## Phase 4 — Enterprise Hybrid AI Platform
+
+### Objectives
+
+- support institutional-grade AI infrastructure
+- optimize cost and governance
+
+### Deliverables
+
+- AWS Bedrock integration
+- multi-provider failover
+- risk-aware escalation
+- AI governance dashboards
+- approval workflows
+- audit lineage graphs
+- enterprise AI routing controls
+
+---
+
+## Phase 5 — Autonomous Optimization
+
+### Objectives
+
+- enable self-optimizing AI infrastructure
+- improve routing intelligence over time
+
+### Deliverables
+
+- adaptive routing policies
+- automated model benchmarking
+- AI-driven routing optimization
+- reinforcement-based routing heuristics
+- predictive cost optimization
+- workload pattern analysis
+- dynamic provider selection
 
 ---
 

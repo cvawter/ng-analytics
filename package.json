@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "dev:web": "npm run dev --workspace=@ng-analytics/web",
+    "dev:web-shadcn": "npm run dev --workspace=@ng-analytics/web-shadcn",
     "dev:mobile": "npm run start --workspace=@ng-analytics/mobile",
-    "dev": "npm run dev:web"
+    "dev": "npm run dev:web-shadcn"
   }
 }

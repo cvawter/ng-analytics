@@ -37,21 +37,32 @@ export default function HubScreen() {
           </Text>
         </Pressable>
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.card,
-            pressed && styles.cardPressed
-          ]}
-          onPress={() => router.push('/ontology')}
-        >
+        <Pressable 
+        style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+        onPress={() => router.push('/ontology')}
+      >
           <View style={styles.cardIconBox}>
-            <Feather name="git-branch" size={24} color="#f0a500" />
+            <Feather name="share-2" size={24} color="#f0a500" />
           </View>
           <Text style={styles.cardTitle}>Ontology Explorer</Text>
-          <Text style={styles.cardDesc}>
-            Navigate the cross-domain knowledge graph. Review mappings, approve terms for the curated layer, and trace reasoning paths.
-          </Text>
-        </Pressable>
+        <Text style={styles.cardDesc}>
+          Interactive graph visualization of the Industry Ontology Reference Library defining AI energy demand and supply networks.
+        </Text>
+      </Pressable>
+
+      <Pressable 
+        style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+        onPress={() => router.push('/legislation' as any)}
+      >
+          <View style={styles.cardIconBox}>
+            <Feather name="file-text" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>Legislation</Text>
+        <Text style={styles.cardDesc}>
+          Track regulatory dockets, documents, and public comments impacting energy infrastructure and AI expansion.
+        </Text>
+      </Pressable>
+
         <Pressable
           style={({ pressed }) => [
             styles.card,
@@ -113,6 +124,22 @@ export default function HubScreen() {
           <Text style={styles.cardTitle}>Market Data</Text>
           <Text style={styles.cardDesc}>
             Live Spot pricing and 12-month forward Futures Curve for Henry Hub Natural Gas.
+          </Text>
+        </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.card,
+            pressed && styles.cardPressed
+          ]}
+          onPress={() => router.push('/companies')}
+        >
+          <View style={styles.cardIconBox}>
+            <Feather name="briefcase" size={24} color="#f0a500" />
+          </View>
+          <Text style={styles.cardTitle}>AI Energy Demand</Text>
+          <Text style={styles.cardDesc}>
+            Explore hyperscalers, utilities, and infrastructure providers driving the AI electricity boom.
           </Text>
         </Pressable>
       </View>

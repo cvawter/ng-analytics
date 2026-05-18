@@ -21,6 +21,8 @@ export default function RootLayout() {
         <Stack.Screen name="auto-research" options={{ title: 'Auto Research' }} />
         <Stack.Screen name="markets" options={{ title: 'Market Data' }} />
         <Stack.Screen name="ontology-graph" options={{ title: 'Type Graph' }} />
+        <Stack.Screen name="companies" options={{ title: 'AI Energy Companies' }} />
+        <Stack.Screen name="companies/[id]" options={{ title: 'Company Overview' }} />
       </Stack>
       <StatusBar style="light" />
     </>

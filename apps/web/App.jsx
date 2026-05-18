@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Database, Network, ArrowLeft, Terminal, Cpu, Share2, TrendingUp } from 'lucide-react';
+import { Database, Network, ArrowLeft, Terminal, Cpu, Share2, TrendingUp, Building2, Gavel } from 'lucide-react';
 import { Card, CardContent } from './components/ui/card';
 import EIANaturalGasReports from './ngreports';
 import MacroDeskOntologyExplorer from './ontology-explorer';
@@ -8,6 +8,8 @@ import AIChatInterface from './chat';
 import GraphExplorer from './graph-explorer';
 import AutoResearcher from './auto-research';
 import Markets from './markets';
+import Companies from './companies';
+import Legislation from './legislation';
 
 function LandingPage({ setView }) {
   return (
@@ -58,6 +60,22 @@ function LandingPage({ setView }) {
           </Card>
         </motion.button>
 
+        <motion.button onClick={() => setView('legislation')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Gavel className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Legislation</h3>
+              </div>
+              <p className="text-[#8a94a6] leading-relaxed">
+                Track regulatory dockets, documents, and public comments impacting energy infrastructure and AI expansion.
+              </p>
+            </CardContent>
+          </Card>
+        </motion.button>
+
         <motion.button onClick={() => setView('chat')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
@@ -100,8 +118,20 @@ function LandingPage({ setView }) {
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
                 <TrendingUp className="h-7 w-7" />
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Market Data</h2>
-              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Live Spot pricing and 12-month forward Futures Curve for Henry Hub Natural Gas.</p>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Market Pricing</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Track real-time NG basis, Henry Hub spot, and forward curve backwardation.</p>
+            </CardContent>
+          </Card>
+        </motion.button>
+
+        <motion.button onClick={() => setView('companies')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+          <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
+            <CardContent className="p-8">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
+                <Building2 className="h-7 w-7" />
+              </div>
+              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">AI Energy Demand</h2>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Explore hyperscalers, utilities, and infrastructure providers driving the AI electricity boom.</p>
             </CardContent>
           </Card>
         </motion.button>
@@ -155,6 +185,18 @@ export default function App() {
         {currentView === 'markets' && (
           <motion.div key="markets" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
             <Markets />
+          </motion.div>
+        )}
+
+        {currentView === 'companies' && (
+          <motion.div key="companies" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
+            <Companies />
+          </motion.div>
+        )}
+
+        {currentView === 'legislation' && (
+          <motion.div key="legislation" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
+            <Legislation />
           </motion.div>
         )}
       </AnimatePresence>

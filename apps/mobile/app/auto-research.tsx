@@ -32,7 +32,7 @@ export default function AutoResearchScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isRunning) {
       const messages = [
         '[AGENT] Parsing incoming EIA Storage Report...',

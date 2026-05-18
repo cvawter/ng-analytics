@@ -185,3 +185,161 @@ export const silverFuturesCurve = [
   { month: "Apr 26", price: 34.40 },
   { month: "May 26", price: 34.55 },
 ];
+
+// ─── Battery Metals — Lithium Carbonate benchmark (Chinese spot, $/kg) ────────
+// Lithium Carbonate 99.5% (LC) is the primary benchmark for the battery metals
+// complex. Cobalt (LME), Nickel (LME), and Lithium are the three critical inputs
+// for NMC/NCA cathode chemistries powering grid-scale storage and data center UPS.
+
+export const batteryMetalsSpot = {
+  symbol: "LiCO3:CN",
+  name: "Lithium Carbonate 99.5% (China Spot)",
+  price: 10.85,
+  open: 10.70,
+  high: 11.10,
+  low: 10.65,
+  weekHigh52: 18.40,
+  weekLow52: 9.20,
+  avgVolume: "OTC / SHFE",
+  change: "+0.15",
+  percentChange: "+1.40%",
+  lastUpdated: new Date().toLocaleTimeString(),
+  trend: "up",
+  unit: "kg",
+  color: "#f472b6",
+  note: "Chinese spot benchmark. Lithium crashed ~85% from 2022 highs; recovering with new storage demand.",
+};
+
+export const batteryMetalsHistory = [
+  { date: "Apr 18", price: 9.60 },
+  { date: "Apr 21", price: 9.55 },
+  { date: "Apr 22", price: 9.70 },
+  { date: "Apr 23", price: 9.80 },
+  { date: "Apr 24", price: 9.75 },
+  { date: "Apr 25", price: 9.90 },
+  { date: "Apr 28", price: 10.05 },
+  { date: "Apr 29", price: 10.15 },
+  { date: "Apr 30", price: 10.10 },
+  { date: "May 1",  price: 10.25 },
+  { date: "May 2",  price: 10.40 },
+  { date: "May 5",  price: 10.35 },
+  { date: "May 6",  price: 10.50 },
+  { date: "May 7",  price: 10.60 },
+  { date: "May 8",  price: 10.55 },
+  { date: "May 9",  price: 10.70 },
+  { date: "May 12", price: 10.65 },
+  { date: "May 13", price: 10.75 },
+  { date: "May 14", price: 10.80 },
+  { date: "May 15", price: 10.70 },
+  { date: "May 16", price: 10.75 },
+  { date: "May 19", price: 10.80 },
+  { date: "May 20", price: 10.82 },
+  { date: "May 21", price: 10.85 },
+];
+
+export const batteryMetalsFutures = [
+  { month: "Jun 25", price: 11.20 },
+  { month: "Jul 25", price: 11.60 },
+  { month: "Aug 25", price: 12.00 },
+  { month: "Sep 25", price: 12.45 },
+  { month: "Oct 25", price: 12.90 },
+  { month: "Nov 25", price: 13.30 },
+  { month: "Dec 25", price: 13.80 },
+  { month: "Jan 26", price: 14.20 },
+  { month: "Feb 26", price: 14.65 },
+  { month: "Mar 26", price: 15.10 },
+  { month: "Apr 26", price: 15.50 },
+  { month: "May 26", price: 15.90 },
+];
+
+// Individual battery metal spot prices
+export const batteryMetalsIndividual = [
+  { name: "Lithium Carbonate",  symbol: "LiCO3",   price: 10.85,  unit: "kg", change: "+1.40%", trend: "up",   note: "Primary Li benchmark; grid storage & EV batteries" },
+  { name: "Lithium Hydroxide",  symbol: "LiOH",    price: 11.60,  unit: "kg", change: "+0.87%", trend: "up",   note: "High-nickel NMC cathodes; preferred for EV/UPS" },
+  { name: "Cobalt",             symbol: "Co",       price: 24.20,  unit: "kg", change: "-0.41%", trend: "down", note: "LME-traded; NMC/NCA cathodes; 70% supply from DRC" },
+  { name: "Cobalt Sulfate",     symbol: "CoSO4",   price: 3.85,   unit: "kg", change: "-0.26%", trend: "down", note: "Battery-grade precursor for cathode manufacturing" },
+  { name: "Nickel (LME)",       symbol: "Ni",       price: 15.80,  unit: "kg", change: "+0.64%", trend: "up",   note: "LME spot; high-Ni cathodes reducing cobalt content" },
+  { name: "Nickel Sulfate",     symbol: "NiSO4",   price: 3.92,   unit: "kg", change: "+0.51%", trend: "up",   note: "Battery-grade; key input for NMC811 & NCMA cathodes" },
+  { name: "Manganese Sulfate",  symbol: "MnSO4",   price: 0.38,   unit: "kg", change: "-1.30%", trend: "down", note: "LFP/LMFP cathodes; lowest cost, no cobalt chemistry" },
+  { name: "Graphite (Natural)", symbol: "C-NAT",   price: 0.52,   unit: "kg", change: "-0.96%", trend: "down", note: "Anode material; China controls ~85% of supply" },
+];
+
+// ─── Rare Earth Elements — NdPr Oxide (COMEX / Chinese domestic spot) ────────
+// NdPr (Neodymium-Praseodymium) oxide is the primary commercially traded REE,
+// used in permanent magnets for wind turbines, EV motors, and AI data center
+// cooling fans. Prices are in USD/kg, benchmarked to Chinese spot market.
+
+export const reeSpotPrices = {
+  symbol: "NdPr:OXIDE",
+  name: "NdPr Oxide Spot (Chinese Domestic)",
+  price: 74.80,
+  open: 73.50,
+  high: 75.40,
+  low: 73.10,
+  weekHigh52: 98.50,
+  weekLow52: 58.20,
+  avgVolume: "N/A (OTC)",
+  change: "+1.30",
+  percentChange: "+1.77%",
+  lastUpdated: new Date().toLocaleTimeString(),
+  trend: "up",
+  unit: "kg",
+  color: "#34d399",
+  note: "Sourced from Chinese domestic spot. No formal exchange listing — OTC/broker-quoted.",
+};
+
+export const reeSpotHistory = [
+  { date: "Apr 18", price: 61.20 },
+  { date: "Apr 21", price: 61.80 },
+  { date: "Apr 22", price: 62.40 },
+  { date: "Apr 23", price: 62.10 },
+  { date: "Apr 24", price: 63.00 },
+  { date: "Apr 25", price: 63.80 },
+  { date: "Apr 28", price: 64.50 },
+  { date: "Apr 29", price: 65.20 },
+  { date: "Apr 30", price: 65.90 },
+  { date: "May 1",  price: 66.80 },
+  { date: "May 2",  price: 67.40 },
+  { date: "May 5",  price: 67.10 },
+  { date: "May 6",  price: 68.20 },
+  { date: "May 7",  price: 69.00 },
+  { date: "May 8",  price: 68.60 },
+  { date: "May 9",  price: 69.80 },
+  { date: "May 12", price: 70.50 },
+  { date: "May 13", price: 71.20 },
+  { date: "May 14", price: 70.90 },
+  { date: "May 15", price: 72.00 },
+  { date: "May 16", price: 72.80 },
+  { date: "May 19", price: 73.50 },
+  { date: "May 20", price: 74.10 },
+  { date: "May 21", price: 74.80 },
+];
+
+// REE forward curve = analyst price outlook (no formal futures exchange)
+export const reeFuturesCurve = [
+  { month: "Jun 25", price: 75.50 },
+  { month: "Jul 25", price: 76.80 },
+  { month: "Aug 25", price: 78.20 },
+  { month: "Sep 25", price: 79.50 },
+  { month: "Oct 25", price: 81.00 },
+  { month: "Nov 25", price: 82.40 },
+  { month: "Dec 25", price: 84.00 },
+  { month: "Jan 26", price: 85.50 },
+  { month: "Feb 26", price: 86.80 },
+  { month: "Mar 26", price: 88.20 },
+  { month: "Apr 26", price: 89.50 },
+  { month: "May 26", price: 91.00 },
+];
+
+// Individual REE spot prices for the detail panel
+export const reeIndividualPrices = [
+  { name: "Neodymium Oxide",   symbol: "Nd2O3",  price: 74.80,  unit: "kg", change: "+1.77%", trend: "up",   note: "Key magnet material; wind turbines, EV motors" },
+  { name: "Praseodymium Oxide",symbol: "Pr6O11",  price: 74.80,  unit: "kg", change: "+1.77%", trend: "up",   note: "Alloyed with Nd for NdFeB magnets" },
+  { name: "Dysprosium Oxide",  symbol: "Dy2O3",  price: 298.00, unit: "kg", change: "+0.68%", trend: "up",   note: "High-temp magnet performance; very limited supply" },
+  { name: "Terbium Oxide",     symbol: "Tb4O7",  price: 890.00, unit: "kg", change: "+0.45%", trend: "up",   note: "Green phosphors and NdFeB magnets; critical scarcity" },
+  { name: "Lanthanum Oxide",   symbol: "La2O3",  price: 1.85,   unit: "kg", change: "-0.54%", trend: "down", note: "EV NiMH batteries, fluid cracking catalysts" },
+  { name: "Cerium Oxide",      symbol: "CeO2",   price: 1.92,   unit: "kg", change: "-0.52%", trend: "down", note: "Most abundant REE; polishing, catalysts" },
+  { name: "Gallium",           symbol: "Ga",     price: 248.00, unit: "kg", change: "+2.15%", trend: "up",   note: "GaN semiconductors in AI power electronics" },
+  { name: "Germanium",         symbol: "Ge",     price: 1420.00,unit: "kg", change: "+1.88%", trend: "up",   note: "Fiber optics and infrared optics for data centers" },
+];
+

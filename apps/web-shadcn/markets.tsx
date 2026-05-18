@@ -3,12 +3,14 @@ import {
   AreaChart, Area, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine
 } from 'recharts';
-import { TrendingUp, TrendingDown, Activity, Calendar, BarChart2, Flame, Droplets, Gem } from 'lucide-react';
+import { TrendingUp, TrendingDown, Activity, Calendar, BarChart2, Flame, Droplets, Gem, Zap, Battery } from 'lucide-react';
 // @ts-expect-error - Shared module typings are not yet generated
 import {
   spotPrices, spotHistory, futuresCurve,
   oilSpotPrices, oilSpotHistory, oilFuturesCurve,
-  silverSpotPrices, silverSpotHistory, silverFuturesCurve
+  silverSpotPrices, silverSpotHistory, silverFuturesCurve,
+  batteryMetalsSpot, batteryMetalsHistory, batteryMetalsFutures, batteryMetalsIndividual,
+  reeSpotPrices, reeSpotHistory, reeFuturesCurve, reeIndividualPrices
 } from '@ng-analytics/shared';
 
 interface SpotData {
@@ -25,9 +27,11 @@ interface CommodityDef {
 }
 
 const COMMODITIES: CommodityDef[] = [
-  { key: 'ng',     label: 'Natural Gas',   icon: Flame,    spot: spotPrices,       history: spotHistory,       futures: futuresCurve,       accentColor: '#f0a500', gradientId: 'ngGradSC'     },
-  { key: 'oil',    label: 'WTI Crude Oil', icon: Droplets, spot: oilSpotPrices,    history: oilSpotHistory,    futures: oilFuturesCurve,    accentColor: '#60a5fa', gradientId: 'oilGradSC'    },
-  { key: 'silver', label: 'Silver',        icon: Gem,      spot: silverSpotPrices, history: silverSpotHistory, futures: silverFuturesCurve, accentColor: '#a78bfa', gradientId: 'silverGradSC' },
+  { key: 'ng',      label: 'Natural Gas',    icon: Flame,    spot: spotPrices,          history: spotHistory,          futures: futuresCurve,          accentColor: '#f0a500', gradientId: 'ngGradSC'      },
+  { key: 'oil',     label: 'WTI Crude Oil',  icon: Droplets, spot: oilSpotPrices,       history: oilSpotHistory,       futures: oilFuturesCurve,       accentColor: '#60a5fa', gradientId: 'oilGradSC'     },
+  { key: 'silver',  label: 'Silver',         icon: Gem,      spot: silverSpotPrices,    history: silverSpotHistory,    futures: silverFuturesCurve,    accentColor: '#a78bfa', gradientId: 'silverGradSC'  },
+  { key: 'battery', label: 'Battery Metals', icon: Battery,  spot: batteryMetalsSpot,   history: batteryMetalsHistory, futures: batteryMetalsFutures,  accentColor: '#f472b6', gradientId: 'batteryGradSC' },
+  { key: 'ree',     label: 'Rare Earths',    icon: Zap,      spot: reeSpotPrices,       history: reeSpotHistory,       futures: reeFuturesCurve,       accentColor: '#34d399', gradientId: 'reeGradSC'     },
 ];
 
 function StatBox({ label, value, sub }: { label: string; value: string; sub?: string }) {
@@ -109,14 +113,35 @@ function CommodityView({ commodity }: { commodity: CommodityDef }) {
           </div>
         </div>
 
-        <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4 content-start">
-          <StatBox label="Open" value={fmt(spot.open)} />
-          <StatBox label="Day High" value={fmt(spot.high)} />
-          <StatBox label="Day Low" value={fmt(spot.low)} />
-          <StatBox label="52-Wk High" value={`$${spot.weekHigh52.toFixed(2)}`} sub="All-time context" />
-          <StatBox label="52-Wk Low" value={`$${spot.weekLow52.toFixed(2)}`} sub="All-time context" />
-          <StatBox label="Avg Volume" value={spot.avgVolume} sub="NYMEX contracts" />
-        </div>
+        {commodity.key !== 'ree' && commodity.key !== 'battery' && (
+          <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4 content-start">
+            <StatBox label="Open" value={fmt(spot.open)} />
+            <StatBox label="Day High" value={fmt(spot.high)} />
+            <StatBox label="Day Low" value={fmt(spot.low)} />
+            <StatBox label="52-Wk High" value={`$${spot.weekHigh52.toFixed(2)}`} sub="All-time context" />
+            <StatBox label="52-Wk Low" value={`$${spot.weekLow52.toFixed(2)}`} sub="All-time context" />
+            <StatBox label="Avg Volume" value={spot.avgVolume} sub="NYMEX contracts" />
+          </div>
+        )}
+        {(commodity.key === 'ree' || commodity.key === 'battery') && (
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3 content-start">
+            {(commodity.key === 'ree' ? reeIndividualPrices : batteryMetalsIndividual).map((r: any) => (
+              <div key={r.symbol} className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-bold font-mono text-[#34d399]">{r.symbol}</span>
+                    <span className="text-[13px] font-semibold text-[#eef0f4] truncate">{r.name}</span>
+                  </div>
+                  <span className="text-[11px] text-[#6b7280] leading-relaxed">{r.note}</span>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="text-[14px] font-bold font-mono text-white">${r.price.toFixed(r.price < 10 ? 2 : 0)}<span className="text-[10px] text-[#6b7280] ml-1">/{r.unit}</span></div>
+                  <div className={`text-[11px] font-bold ${r.trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>{r.change}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 30-Day Spot Chart */}
@@ -158,8 +183,8 @@ function CommodityView({ commodity }: { commodity: CommodityDef }) {
             <Calendar className="h-5 w-5" style={{ color: accentColor }} />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-white">{spot.symbol} Futures Curve</h2>
-            <p className="text-sm text-[#9ca3af]">12-Month Forward Strip · $/{spot.unit}</p>
+            <h2 className="text-xl font-bold text-white">{commodity.key === 'ree' ? 'NdPr Oxide Price Outlook' : commodity.key === 'battery' ? 'Lithium Carbonate Price Outlook' : `${spot.symbol} Futures Curve`}</h2>
+            <p className="text-sm text-[#9ca3af]">{commodity.key === 'ree' || commodity.key === 'battery' ? '12-Month Analyst Consensus · $/kg' : `12-Month Forward Strip · $/${spot.unit}`}</p>
           </div>
         </div>
         <div className="h-[280px] w-full">

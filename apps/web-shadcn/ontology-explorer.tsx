@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+// @ts-expect-error - Shared module typings are not yet generated
 import { ontologyTerms, relationshipGraph, externalOntologies, ontologyCategories } from "@ng-analytics/shared";
 import { motion } from "framer-motion";
 import OntologyGraphViewer from "./ontology-graph-viewer";
@@ -33,6 +34,30 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+interface OntologyTerm {
+    id: string;
+    name: string;
+    domain: string;
+    definition: string;
+    status: string;
+    confidence: number;
+    mappedTo: string[];
+    sources: string[];
+    relationships: string[];
+}
+
+interface ExternalOntology {
+    id: string;
+    name: string;
+    fullName: string;
+    namespace: string;
+    category: string;
+    url: string;
+    baseTypes: string[];
+    relevance: string;
+    usage: string;
+}
+
 
 
 const domains = [
@@ -46,14 +71,14 @@ const domains = [
 
 
 
-const statusClasses = {
+const statusClasses: Record<string, string> = {
     Curated: "bg-emerald-400/10 text-emerald-400 border-emerald-400/30",
     Reviewed: "bg-blue-400/10 text-blue-400 border-blue-400/30",
     Proposed: "bg-[#f0a500]/10 text-[#f0a500] border-[#f0a500]/30",
     Mapped: "bg-purple-400/10 text-purple-400 border-purple-400/30",
 };
 
-const categoryColors = {
+const categoryColors: Record<string, string> = {
     "Energy": "text-emerald-400 bg-emerald-400/10 border-emerald-400/30",
     "Finance & Trading": "text-blue-400 bg-blue-400/10 border-blue-400/30",
     "Provenance": "text-purple-400 bg-purple-400/10 border-purple-400/30",
@@ -73,12 +98,12 @@ export default function MacroDeskOntologyExplorer() {
     const [selectedId, setSelectedId] = useState("ng-working-gas");
     const [extCategory, setExtCategory] = useState("All");
     const [extSearch, setExtSearch] = useState("");
-    const [graphOntology, setGraphOntology] = useState(null);
-    const [browserUrl, setBrowserUrl] = useState(null);
+    const [graphOntology, setGraphOntology] = useState<ExternalOntology | null>(null);
+    const [browserUrl, setBrowserUrl] = useState<string | null>(null);
 
     const filteredTerms = useMemo(() => {
         const q = query.toLowerCase();
-        return ontologyTerms.filter((term) => {
+        return ontologyTerms.filter((term: OntologyTerm) => {
             const matchesQuery =
                 term.name.toLowerCase().includes(q) ||
                 term.domain.toLowerCase().includes(q) ||
@@ -89,7 +114,7 @@ export default function MacroDeskOntologyExplorer() {
         });
     }, [query, domain]);
 
-    const selected = ontologyTerms.find((term) => term.id === selectedId) || filteredTerms[0] || ontologyTerms[0];
+    const selected = ontologyTerms.find((term: OntologyTerm) => term.id === selectedId) || filteredTerms[0] || ontologyTerms[0];
 
     return (
         <>
@@ -167,7 +192,7 @@ export default function MacroDeskOntologyExplorer() {
                                 >
                                     ALL
                                 </button>
-                                {[...new Set(ontologyTerms.map((t) => t.domain))].map((d) => (
+                                {[...new Set<string>(ontologyTerms.map((t: OntologyTerm) => t.domain))].map((d: string) => (
                                     <button
                                         key={d}
                                         onClick={() => setDomain(d)}
@@ -181,7 +206,7 @@ export default function MacroDeskOntologyExplorer() {
                             </div>
 
                             <div className="space-y-3">
-                                {filteredTerms.map((term) => (
+                                {filteredTerms.map((term: OntologyTerm) => (
                                     <button
                                         key={term.id}
                                         onClick={() => setSelectedId(term.id)}
@@ -245,7 +270,7 @@ export default function MacroDeskOntologyExplorer() {
                                             <Network className="h-4 w-4 text-[#f0a500]" /> External / Canonical Mappings
                                         </h3>
                                         <div className="space-y-2">
-                                            {selected.mappedTo.map((mapping) => (
+                                            {selected.mappedTo.map((mapping: string) => (
                                                 <div key={mapping} className="rounded-xl border border-white/5 bg-white/[0.03] px-3 py-2 font-mono text-[12px] text-[#c8cdd8]">
                                                     {mapping}
                                                 </div>
@@ -257,7 +282,7 @@ export default function MacroDeskOntologyExplorer() {
                                             <GitBranch className="h-4 w-4 text-[#f0a500]" /> Relationships
                                         </h3>
                                         <div className="space-y-2">
-                                            {selected.relationships.map((rel) => (
+                                            {selected.relationships.map((rel: string) => (
                                                 <div key={rel} className="rounded-xl border border-white/5 bg-white/[0.03] px-3 py-2 font-mono text-[12px] text-[#c8cdd8]">
                                                     {rel}
                                                 </div>
@@ -270,10 +295,10 @@ export default function MacroDeskOntologyExplorer() {
                                     <Button className="rounded-xl font-mono text-[11px] tracking-wider uppercase">
                                         <CheckCircle2 className="mr-2 h-4 w-4" /> Approve to Curated Layer
                                     </Button>
-                                    <Button variant="outline" className="rounded-xl font-mono text-[11px] tracking-wider uppercase">
+                                    <Button className="rounded-xl font-mono text-[11px] tracking-wider uppercase">
                                         <AlertTriangle className="mr-2 h-4 w-4" /> Request Clarification
                                     </Button>
-                                    <Button variant="outline" className="rounded-xl font-mono text-[11px] tracking-wider uppercase">
+                                    <Button className="rounded-xl font-mono text-[11px] tracking-wider uppercase">
                                         <XCircle className="mr-2 h-4 w-4" /> Reject Term
                                     </Button>
                                 </div>
@@ -381,7 +406,7 @@ export default function MacroDeskOntologyExplorer() {
 
                     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                         {externalOntologies
-                            .filter((ont) => {
+                            .filter((ont: ExternalOntology) => {
                                 const q = extSearch.toLowerCase();
                                 const matchesSearch = !q ||
                                     ont.name.toLowerCase().includes(q) ||
@@ -392,7 +417,7 @@ export default function MacroDeskOntologyExplorer() {
                                 const matchesCat = extCategory === "All" || ont.category === extCategory;
                                 return matchesSearch && matchesCat;
                             })
-                            .map((ont) => (
+                            .map((ont: ExternalOntology) => (
                                 <Card key={ont.id} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.035] transition-colors">
                                     <CardContent className="p-5">
                                         <div className="mb-3 flex items-start justify-between gap-2">
@@ -417,7 +442,7 @@ export default function MacroDeskOntologyExplorer() {
                                                 <Tag className="h-3 w-3" /> Base Types
                                             </div>
                                             <div className="flex flex-wrap gap-1.5">
-                                                {ont.baseTypes.map((t) => (
+                                                {ont.baseTypes.map((t: string) => (
                                                     <span key={t} className="rounded-md border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[10px] text-[#c8cdd8]">{t}</span>
                                                 ))}
                                             </div>
@@ -429,12 +454,12 @@ export default function MacroDeskOntologyExplorer() {
                                         <div className="rounded-lg border border-[#f0a500]/10 bg-[#f0a500]/5 p-2.5 text-[11px] leading-relaxed text-[#c8cdd8]">
                                             <span className="font-mono font-bold text-[#f0a500]">USAGE → </span>{ont.usage}
                                         </div>
-                                        <button
+                                        <Button
                                             onClick={() => setGraphOntology(ont)}
-                                            className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border border-[#f0a500]/20 bg-[#f0a500]/5 hover:bg-[#f0a500]/10 hover:border-[#f0a500]/40 px-4 py-2.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#f0a500] transition-all"
+                                            className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl font-mono text-[11px] font-bold uppercase tracking-wider transition-all"
                                         >
                                             <GitFork className="h-3.5 w-3.5" /> Explore Type Graph
-                                        </button>
+                                        </Button>
                                     </CardContent>
                                 </Card>
                             ))}

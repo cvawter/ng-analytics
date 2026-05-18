@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Database, Network, ArrowLeft, Terminal, Cpu, Share2, TrendingUp, Building2, Gavel } from 'lucide-react';
+import { Network, ArrowLeft, Terminal, Cpu, Share2, TrendingUp, Building2, Gavel, BookOpen } from 'lucide-react';
 import { Card, CardContent } from './components/ui/card';
 import EIANaturalGasReports from './ngreports';
 import MacroDeskOntologyExplorer from './ontology-explorer';
@@ -10,6 +10,7 @@ import AutoResearcher from './auto-research';
 import Markets from './markets';
 import Companies from './companies';
 import Legislation from './legislation';
+import DataSources from './datasources';
 
 function LandingPage({ setView }: { setView: (view: string) => void }) {
   return (
@@ -35,17 +36,17 @@ function LandingPage({ setView }: { setView: (view: string) => void }) {
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl relative z-10">
-        <motion.button onClick={() => setView('reports')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl relative z-10">
+        <motion.button onClick={() => setView('datasources')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
-                  <Database className="h-6 w-6" />
+                  <BookOpen className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Natural Gas Reports</h3>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Data Sources</h3>
               </div>
-              <p className="text-[14px] leading-relaxed text-[#8a94a6]">Explore the complete historical catalog of EIA publications. Access release schedules and data matrices.</p>
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">19 curated free data sources covering EIA NG reports, commodity prices, critical minerals, regulatory filings, and financial data.</p>
             </CardContent>
           </Card>
         </motion.button>
@@ -211,6 +212,12 @@ export default function App() {
         {currentView === 'legislation' && (
           <motion.div key="legislation" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
             <Legislation />
+          </motion.div>
+        )}
+
+        {currentView === 'datasources' && (
+          <motion.div key="datasources" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative">
+            <DataSources />
           </motion.div>
         )}
       </AnimatePresence>

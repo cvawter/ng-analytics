@@ -39,10 +39,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('reports')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Database className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Database className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Natural Gas Reports</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Natural Gas Reports</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Explore the complete historical catalog of EIA publications. Access release schedules and data matrices.</p>
             </CardContent>
           </Card>
@@ -51,10 +53,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('ontology')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Network className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Network className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Ontology Explorer</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Ontology Explorer</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Navigate the cross-domain knowledge graph. Review mappings and trace reasoning paths.</p>
             </CardContent>
           </Card>
@@ -64,12 +68,12 @@ function LandingPage({ setView }) {
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
                   <Gavel className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Legislation</h3>
               </div>
-              <p className="text-[#8a94a6] leading-relaxed">
+              <p className="text-[14px] leading-relaxed text-[#8a94a6]">
                 Track regulatory dockets, documents, and public comments impacting energy infrastructure and AI expansion.
               </p>
             </CardContent>
@@ -79,10 +83,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('chat')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Cpu className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Cpu className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">AI Graph Analyst</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">AI Graph Analyst</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Interact with our GraphRAG backend. Query the knowledge graph using natural language.</p>
             </CardContent>
           </Card>
@@ -91,10 +97,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('graph')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Share2 className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Share2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Graph Visualizer</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Graph Visualizer</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Interactive 2D physics graph. Zoom, pan, and drag nodes to explore Neo4j data structures.</p>
             </CardContent>
           </Card>
@@ -103,10 +111,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('autoresearch')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-gradient-to-r from-white/[0.02] to-[#f0a500]/5 hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Terminal className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Terminal className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Auto Research</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Auto Research</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Background hypothesis generation agent. Review proposals to continuously build the LLM Context Wiki.</p>
             </CardContent>
           </Card>
@@ -115,10 +125,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('markets')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <TrendingUp className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <TrendingUp className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Market Pricing</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">Market Pricing</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Track real-time NG basis, Henry Hub spot, and forward curve backwardation.</p>
             </CardContent>
           </Card>
@@ -127,10 +139,12 @@ function LandingPage({ setView }) {
         <motion.button onClick={() => setView('companies')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="text-left w-full focus:outline-none">
           <Card className="h-full rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f0a500]/30 group">
             <CardContent className="p-8">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 transition-transform">
-                <Building2 className="h-7 w-7" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
+                  <Building2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">AI Energy Demand</h3>
               </div>
-              <h2 className="text-2xl font-bold text-[#eef0f4] mb-3">AI Energy Demand</h2>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Explore hyperscalers, utilities, and infrastructure providers driving the AI electricity boom.</p>
             </CardContent>
           </Card>

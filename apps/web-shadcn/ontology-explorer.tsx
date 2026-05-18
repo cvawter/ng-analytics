@@ -135,7 +135,7 @@ export default function MacroDeskOntologyExplorer() {
                             </span>
                         </div>
                         <h1 className="m-0 text-[26px] font-bold leading-tight tracking-tight text-[#eef0f4]">
-                            Ontology Explorer
+                            Ontology Explorer{" "}
                             <span className="text-[#f0a500]"> — Knowledge Graph</span>
                         </h1>
                         <p className="mt-2 max-w-2xl text-[13px] text-[#6b7280]">
@@ -312,7 +312,7 @@ export default function MacroDeskOntologyExplorer() {
                                         <LineChart className="h-5 w-5 text-[#f0a500]" /> Cross-Domain Reasoning
                                     </h3>
                                     <div className="space-y-3">
-                                        {relationshipGraph.map(([a, rel, b], idx) => (
+                                        {relationshipGraph.map(([a, rel, b]: [string, string, string], idx: number) => (
                                             <motion.div
                                                 key={`${a}-${b}`}
                                                 initial={{ opacity: 0, x: -8 }}
@@ -390,7 +390,7 @@ export default function MacroDeskOntologyExplorer() {
                             />
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            {ontologyCategories.map((cat) => (
+                            {ontologyCategories.map((cat: string) => (
                                 <button
                                     key={cat}
                                     onClick={() => setExtCategory(cat)}

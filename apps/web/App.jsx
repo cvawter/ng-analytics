@@ -129,7 +129,7 @@ function LandingPage({ setView }) {
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0a500]/10 text-[#f0a500] group-hover:scale-110 group-hover:bg-[#f0a500]/20 transition-all">
                   <TrendingUp className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Market Pricing</h3>
+                <h3 className="text-xl font-bold text-[#eef0f4] group-hover:text-[#f0a500] transition-colors">Markets</h3>
               </div>
               <p className="text-[14px] leading-relaxed text-[#8a94a6]">Track real-time NG basis, Henry Hub spot, and forward curve backwardation.</p>
             </CardContent>
